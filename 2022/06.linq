@@ -4,7 +4,7 @@
 
 void Main()
 {
-    var input = File.ReadAllText(@"c:\Users\twoflower\OneDrive\Devel\LINQPad\Queries\AdventOfCode\2022\06_input");
+    var input = File.ReadAllText("06_input");
     
     FindUniqueMarkerPosition(input, 4).Dump();
     FindUniqueMarkerPosition(input, 14).Dump();
