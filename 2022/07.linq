@@ -2,7 +2,7 @@
 
 void Main()
 {
-    var input = File.ReadAllText(@"c:\Users\twoflower\OneDrive\Devel\LINQPad\Queries\AdventOfCode\2022\07_input");
+    var input = File.ReadAllText("07_input");
 
     using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(input)))
     using (var reader = new StreamReader(stream))
