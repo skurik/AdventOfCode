@@ -4,11 +4,10 @@
 
 void Main()
 {
-	var monkeys = ReadMonkeys(File.ReadLines("11_input"));
-
-	MonkeyBusiness(LetTheMonkeysPlay(monkeys, 20, l => l / 3)).Dump();
-	
+	var monkeys = ReadMonkeys(File.ReadLines(@"c:\Users\StanislavKuřík\OneDrive\Devel\LINQPad\Queries\AdventOfCode\2022\11_input"));
 	var divisorsLcm = monkeys.Select(m => m.Divisor).Multiply();
+
+	MonkeyBusiness(LetTheMonkeysPlay(monkeys,    20, l => l / 3)).Dump();
 	MonkeyBusiness(LetTheMonkeysPlay(monkeys, 10000, l => l % divisorsLcm)).Dump();
 }
 
@@ -29,10 +28,10 @@ public Dictionary<Monkey, int> LetTheMonkeysPlay(List<Monkey> monkeys, int round
 			{			
 				inspectionCounts[monkey] = inspectionCounts.Get(monkey).GetOrZero() + 1;
 				var worryLevel = monkey.Operation.Evaluate(item);
-				var relievedWorryLevel = worryLevelAdjuster(worryLevel);
-				var targetMonkey = monkey.Dispatch(relievedWorryLevel);
+				var reducedWorryLevel = worryLevelAdjuster(worryLevel);
+				var targetMonkey = monkey.Dispatch(reducedWorryLevel);
 								
-				monkeys.ElementAt(targetMonkey).Items.Add(relievedWorryLevel);
+				monkeys.ElementAt(targetMonkey).Items.Add(reducedWorryLevel);
 			}
 			monkey.Items.Clear();
 		}
@@ -48,11 +47,9 @@ public List<Monkey> ReadMonkeys(IEnumerable<string> input)
 
 public Monkey ReadMonkey(IEnumerable<string> input)
 {
-	var items = ParseItems(input.Second());
-	var operation = ParseOperation(input.Third());
 	var dispatch = ParseDispatch(input.Skip(3));
 	
-	return new Monkey(items, operation, dispatch.Item1, dispatch.Item2);
+	return new Monkey(ParseItems(input.Second()), ParseOperation(input.Third()), dispatch.Item1, dispatch.Item2);
 }
 
 public List<long> ParseItems(string line)
