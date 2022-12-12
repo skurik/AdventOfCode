@@ -24,7 +24,6 @@ public int ShortestPath(Map map, IEnumerable<Vector> startingPositions)
         pathLength.Match(
             length => shortestPathLength = shortestPathLength.SafeMin(length)
         );
-
         state = newState;
     }
 
@@ -35,7 +34,7 @@ public Map ReadMap(IEnumerable<string> input)
 {
     var start = null as Vector;
     var end = null as Vector;
-    var grid = input.Traverse((symbol, row, col) =>	symbol.Match(
+    var grid = input.Traverse((symbol, row, col) => symbol.Match(
         'S', _ => { start = new Vector(row, col); return 0; },
         'E', _ => { end = new Vector(row, col); return (int)('z' - 'a'); },
         _ => (int)(symbol - 'a')
