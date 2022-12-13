@@ -15,8 +15,8 @@ void Main()
 
 public int ShortestPath(Map map, IEnumerable<Vector> startingPositions)
 {
-    var state = new State(new HashSet<Vector>(), new Queue<Step>(startingPositions.Select(p => new Step(p, 0))));
-    var shortestPathLength = int.MaxValue;
+	var state = new State(new HashSet<Vector>(), new Queue<Step>(startingPositions.Select(p => new Step(p, 0))));
+	var shortestPathLength = int.MaxValue;
 
     while (state.Queue.NonEmpty())
     {
